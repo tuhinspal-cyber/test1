@@ -66,12 +66,22 @@ document.querySelectorAll(".photo").forEach(photo => {
   const img = photo.querySelector("img");
   const tag = photo.querySelector(".date-tag");
 
-  const fileName = img.src.split("/").pop(); 
-  const datePart = fileName.split("_")[1]; // 20240721
+  const fileName = img.src.split("/").pop();      // IMG_20240721_113159.jpg
+  const rawDate = fileName.split("_")[1];         // 20240721
 
-  tag.textContent = datePart;
+  if (rawDate && rawDate.length === 8) {
+    const year  = rawDate.substring(0, 4);
+    const month = rawDate.substring(4, 6);
+    const day   = rawDate.substring(6, 8);
+
+    tag.textContent = `${year}-${month}-${day}`;
+  } else {
+    tag.textContent = "";
+  }
 });
 </script>
 
+
 </body>
 </html>
+
